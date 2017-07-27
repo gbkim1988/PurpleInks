@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<BlueInksSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExecutionMode>GuidMode</ExecutionMode>
+  <ServerIP>192.168.3.169</ServerIP>
+  <TransferMode>HTTP</TransferMode>
+  <PortNumber>8080</PortNumber>
+</BlueInksSettings>

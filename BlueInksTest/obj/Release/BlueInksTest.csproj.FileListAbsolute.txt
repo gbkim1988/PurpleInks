@@ -1,0 +1,5 @@
+C:\Users\YES24\documents\visual studio 2015\Projects\PurpleInks\BlueInksTest\bin\Release\BlueInksTest.exe.config
+C:\Users\YES24\documents\visual studio 2015\Projects\PurpleInks\BlueInksTest\bin\Release\BlueInksTest.exe
+C:\Users\YES24\documents\visual studio 2015\Projects\PurpleInks\BlueInksTest\bin\Release\BlueInksTest.pdb
+C:\Users\YES24\documents\visual studio 2015\Projects\PurpleInks\BlueInksTest\obj\Release\BlueInksTest.exe
+C:\Users\YES24\documents\visual studio 2015\Projects\PurpleInks\BlueInksTest\obj\Release\BlueInksTest.pdb

@@ -1,0 +1,860 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--pestudio 8.60 - Malware Initial Assessment - www.winitor.com-->
+<image name="pestudiox.exe">
+	<overview>
+		<file-description>Malware Initial Assessment - www.winitor.com</file-description>
+		<file-version>8, 60, 0, 0</file-version>
+		<created>25:06:2013 - 08:22:50</created>
+		<cpu>32</cpu>
+		<size>65536</size>
+		<type>executable</type>
+		<subsystem>Console</subsystem>
+		<signature>Microsoft Visual C++ 8</signature>
+		<entropy>-</entropy>
+		<md5>05E6541D3E8A390C9CA2478554C5C984</md5>
+		<sha1>EAE92B008DA6E88C9BF5430872D83A3AA16549C4</sha1>
+		<imphash>90FFC7FB2366116E16ECE3878F9EB483</imphash>
+	</overview>
+	<indicators count="6">
+		<indicator severity="2">The file references the environment variables</indicator>
+		<indicator severity="2">The file installs an Exception Handler</indicator>
+		<indicator severity="2">The file is scored (0/62) by virustotal</indicator>
+		<indicator severity="5">The file opts for Address Space Layout Randomization (ASLR)</indicator>
+		<indicator severity="5">The file opts for cookies on the stack (GS)</indicator>
+		<indicator severity="7">The file does not reference a Certificate</indicator>
+	</indicators>
+	<virustotal>-</virustotal>
+	<dos-stub>
+		<size>168</size>
+		<md5>05E6541D3E8A390C9CA2478554C5C984</md5>
+		<entropy>5.029</entropy>
+	</dos-stub>
+	<dos-header>disabled</dos-header>
+	<file-header>
+		<machine>0x014C</machine>
+		<sections>0x0005</sections>
+		<compiler-stamp>Sat May 20 22:21:29 2017</compiler-stamp>
+		<pointer-symbol-table>0000</pointer-symbol-table>
+		<number-of-symbols>0000</number-of-symbols>
+		<size-of-optional-header>0x00E0</size-of-optional-header>
+		<relocation-stripped>0</relocation-stripped>
+		<IsExecutable>0</IsExecutable>
+		<large-address-aware>1</large-address-aware>
+		<cpu32>1</cpu32>
+		<uniprocessor>0</uniprocessor>
+		<System>0</System>
+		<ImageDll>0</ImageDll>
+		<DebugStripped>0</DebugStripped>
+		<RemovableRunFromSwap>0</RemovableRunFromSwap>
+		<NetworkRunFromSwap>0</NetworkRunFromSwap>
+	</file-header>
+	<optional-header>
+		<Magic>0x010B</Magic>
+		<linker-version>0.9</linker-version>
+		<size-of-code>0x0000A600</size-of-code>
+		<size-of-initialized-data>0x00005600</size-of-initialized-data>
+		<size-of-uninitialized-data>0x00000000</size-of-uninitialized-data>
+		<address-of-entry-point>0x00004879</address-of-entry-point>
+		<base-of-code>0x00001000</base-of-code>
+		<base-of-data>0x0000C000</base-of-data>
+		<image-base>0x00400000</image-base>
+		<section-alignment>0x00001000</section-alignment>
+		<file-alignment>0x00000200</file-alignment>
+		<os-version>5.0</os-version>
+		<image-version>0.0</image-version>
+		<subsystem-version>5.0</subsystem-version>
+		<Win32VersionValue>0x00000000</Win32VersionValue>
+		<size-of-image>0x00014000</size-of-image>
+		<size-of-headers>0x00000400</size-of-headers>
+		<checksum>0x0001774D</checksum>
+		<subsystem>0x0003</subsystem>
+		<Relocation>1</Relocation>
+		<CodeIntegrity>0</CodeIntegrity>
+		<NxCompatibility>1</NxCompatibility>
+		<IgnoreIsolation>0</IgnoreIsolation>
+		<IgnoreSeh>0</IgnoreSeh>
+		<IgnoreBinding>0</IgnoreBinding>
+		<WdmDriver>0</WdmDriver>
+		<terminal-server-aware>1</terminal-server-aware>
+		<size-of-stack-reserve>0x00100000</size-of-stack-reserve>
+		<size-of-stack-commit>0x00001000</size-of-stack-commit>
+		<size-of-heap-reserve>0x00100000</size-of-heap-reserve>
+		<size-of-heap-commit>0x00001000</size-of-heap-commit>
+		<LoaderFlags>0x00000000</LoaderFlags>
+		<NumberOfRvaAndSizes>0x00000010</NumberOfRvaAndSizes>
+	</optional-header>
+	<directories count="15">
+		<directory name="export-table" address="0x0000" size="0" section="n/a"/>
+		<directory name="import-name" address="0xE63C" size="60" section=".rdata"/>
+		<directory name="resource" address="0x11000" size="1488" section=".rsrc"/>
+		<directory name="exception" address="0x0000" size="0" section="n/a"/>
+		<directory name="security" address="0x0000" size="0" section="n/a"/>
+		<directory name="relocation" address="0x12000" size="2656" section=".reloc"/>
+		<directory name="debug" address="0x0000" size="0" section="n/a"/>
+		<directory name="architecture" address="0x0000" size="0" section="n/a"/>
+		<directory name="global-pointer" address="0x0000" size="0" section="n/a"/>
+		<directory name="thread-storage" address="0x0000" size="0" section="n/a"/>
+		<directory name="load-configuration" address="0xDCE0" size="64" section=".rdata"/>
+		<directory name="bound-import" address="0x0000" size="0" section="n/a"/>
+		<directory name="import-address" address="0xC000" size="248" section=".rdata"/>
+		<directory name="delay-loaded" address="0x0000" size="0" section="n/a"/>
+		<directory name="com-runtime" address="0x0000" size="0" section="n/a"/>
+	</directories>
+	<sections count="5">
+		<section>
+			<name>.text</name>
+			<virtualSize>42351</virtualSize>
+			<VirtualAddress>0x00001000</VirtualAddress>
+			<SizeOfRawData>42496</SizeOfRawData>
+			<PointerToRawData>0x00000400</PointerToRawData>
+			<PointerToRelocations>0x00000000</PointerToRelocations>
+			<PointerToLinenumbers>0x00000000</PointerToLinenumbers>
+			<NumberOfRelocations>0x0000</NumberOfRelocations>
+			<NumberOfLinenumbers>0x0000</NumberOfLinenumbers>
+			<md5>8C75F258B53F62ECAFF954A5955A49E1</md5>
+			<entropy>6.598</entropy>
+			<initialized-data>0</initialized-data>
+			<uninitialized-data>0</uninitialized-data>
+			<discardable>0</discardable>
+			<cannotBeCached>0</cannotBeCached>
+			<cannotBePaged>0</cannotBePaged>
+			<shareable>0</shareable>
+			<executable>1</executable>
+			<readable>1</readable>
+			<writable>0</writable>
+		</section>
+		<section>
+			<name>.rdata</name>
+			<virtualSize>11222</virtualSize>
+			<VirtualAddress>0x0000C000</VirtualAddress>
+			<SizeOfRawData>11264</SizeOfRawData>
+			<PointerToRawData>0x0000AA00</PointerToRawData>
+			<PointerToRelocations>0x00000000</PointerToRelocations>
+			<PointerToLinenumbers>0x00000000</PointerToLinenumbers>
+			<NumberOfRelocations>0x0000</NumberOfRelocations>
+			<NumberOfLinenumbers>0x0000</NumberOfLinenumbers>
+			<md5>6E83170F4BE02B4F1EEBA26772AE2AFB</md5>
+			<entropy>5.236</entropy>
+			<initialized-data>1</initialized-data>
+			<uninitialized-data>0</uninitialized-data>
+			<discardable>0</discardable>
+			<cannotBeCached>0</cannotBeCached>
+			<cannotBePaged>0</cannotBePaged>
+			<shareable>0</shareable>
+			<executable>0</executable>
+			<readable>1</readable>
+			<writable>0</writable>
+		</section>
+		<section>
+			<name>.data</name>
+			<virtualSize>6816</virtualSize>
+			<VirtualAddress>0x0000F000</VirtualAddress>
+			<SizeOfRawData>3584</SizeOfRawData>
+			<PointerToRawData>0x0000D600</PointerToRawData>
+			<PointerToRelocations>0x00000000</PointerToRelocations>
+			<PointerToLinenumbers>0x00000000</PointerToLinenumbers>
+			<NumberOfRelocations>0x0000</NumberOfRelocations>
+			<NumberOfLinenumbers>0x0000</NumberOfLinenumbers>
+			<md5>88CD40D5CFD9EDA95536487D4786E5FA</md5>
+			<entropy>2.848</entropy>
+			<initialized-data>1</initialized-data>
+			<uninitialized-data>0</uninitialized-data>
+			<discardable>0</discardable>
+			<cannotBeCached>0</cannotBeCached>
+			<cannotBePaged>0</cannotBePaged>
+			<shareable>0</shareable>
+			<executable>0</executable>
+			<readable>1</readable>
+			<writable>1</writable>
+		</section>
+		<section>
+			<name>.rsrc</name>
+			<virtualSize>1488</virtualSize>
+			<VirtualAddress>0x00011000</VirtualAddress>
+			<SizeOfRawData>1536</SizeOfRawData>
+			<PointerToRawData>0x0000E400</PointerToRawData>
+			<PointerToRelocations>0x00000000</PointerToRelocations>
+			<PointerToLinenumbers>0x00000000</PointerToLinenumbers>
+			<NumberOfRelocations>0x0000</NumberOfRelocations>
+			<NumberOfLinenumbers>0x0000</NumberOfLinenumbers>
+			<md5>14F66B3E19479A8BE849E8586C5D20F5</md5>
+			<entropy>4.177</entropy>
+			<initialized-data>1</initialized-data>
+			<uninitialized-data>0</uninitialized-data>
+			<discardable>0</discardable>
+			<cannotBeCached>0</cannotBeCached>
+			<cannotBePaged>0</cannotBePaged>
+			<shareable>0</shareable>
+			<executable>0</executable>
+			<readable>1</readable>
+			<writable>0</writable>
+		</section>
+		<section>
+			<name>.reloc</name>
+			<virtualSize>5478</virtualSize>
+			<VirtualAddress>0x00012000</VirtualAddress>
+			<SizeOfRawData>5632</SizeOfRawData>
+			<PointerToRawData>0x0000EA00</PointerToRawData>
+			<PointerToRelocations>0x00000000</PointerToRelocations>
+			<PointerToLinenumbers>0x00000000</PointerToLinenumbers>
+			<NumberOfRelocations>0x0000</NumberOfRelocations>
+			<NumberOfLinenumbers>0x0000</NumberOfLinenumbers>
+			<md5>28851B60EB9FE098B518AA5EA5203277</md5>
+			<entropy>3.962</entropy>
+			<initialized-data>1</initialized-data>
+			<uninitialized-data>0</uninitialized-data>
+			<discardable>1</discardable>
+			<cannotBeCached>0</cannotBeCached>
+			<cannotBePaged>0</cannotBePaged>
+			<shareable>0</shareable>
+			<executable>0</executable>
+			<readable>1</readable>
+			<writable>0</writable>
+		</section>
+	</sections>
+	<libraries count="2">
+		<library name="kernel32.dll" imports="59" file-description="Windows NT BASE API Client DLL"/>
+		<library name="user32.dll" imports="1" file-description="Multi-User Windows USER API Client DLL"/>
+	</libraries>
+	<imports count="60">
+		<import name="FreeLibrary" address="0xE770" library="kernel32.dll"/>
+		<import name="GetLastError" address="0xE77E" library="kernel32.dll"/>
+		<import name="GetProcAddress" address="0xE78E" library="kernel32.dll"/>
+		<import name="LoadLibraryA" address="0xE7A0" library="kernel32.dll"/>
+		<import name="CloseHandle" address="0xE7B0" library="kernel32.dll"/>
+		<import name="Sleep" address="0xE7BE" library="kernel32.dll"/>
+		<import name="GetModuleHandleW" address="0xE7FA" library="kernel32.dll"/>
+		<import name="ExitProcess" address="0xE80E" library="kernel32.dll"/>
+		<import name="TerminateProcess" address="0xE81C" library="kernel32.dll"/>
+		<import name="GetCurrentProcess" address="0xE830" library="kernel32.dll"/>
+		<import name="UnhandledExceptionFilter" address="0xE844" library="kernel32.dll"/>
+		<import name="SetUnhandledExceptionFilter" address="0xE860" library="kernel32.dll"/>
+		<import name="IsDebuggerPresent" address="0xE87E" library="kernel32.dll"/>
+		<import name="RaiseException" address="0xE892" library="kernel32.dll"/>
+		<import name="RtlUnwind" address="0xE8A4" library="kernel32.dll"/>
+		<import name="HeapAlloc" address="0xE8B0" library="kernel32.dll"/>
+		<import name="HeapFree" address="0xE8BC" library="kernel32.dll"/>
+		<import name="TlsGetValue" address="0xE8C8" library="kernel32.dll"/>
+		<import name="TlsAlloc" address="0xE8D6" library="kernel32.dll"/>
+		<import name="TlsSetValue" address="0xE8E2" library="kernel32.dll"/>
+		<import name="TlsFree" address="0xE8F0" library="kernel32.dll"/>
+		<import name="InterlockedIncrement" address="0xE8FA" library="kernel32.dll"/>
+		<import name="SetLastError" address="0xE912" library="kernel32.dll"/>
+		<import name="GetCurrentThreadId" address="0xE922" library="kernel32.dll"/>
+		<import name="InterlockedDecrement" address="0xE938" library="kernel32.dll"/>
+		<import name="WriteFile" address="0xE950" library="kernel32.dll"/>
+		<import name="GetStdHandle" address="0xE95C" library="kernel32.dll"/>
+		<import name="GetModuleFileNameA" address="0xE96C" library="kernel32.dll"/>
+		<import name="DeleteCriticalSection" address="0xE982" library="kernel32.dll"/>
+		<import name="LeaveCriticalSection" address="0xE99A" library="kernel32.dll"/>
+		<import name="EnterCriticalSection" address="0xE9B2" library="kernel32.dll"/>
+		<import name="InitializeCriticalSectionAndSpinCount" address="0xE9CA" library="kernel32.dll"/>
+		<import name="GetCPInfo" address="0xE9F2" library="kernel32.dll"/>
+		<import name="GetACP" address="0xE9FE" library="kernel32.dll"/>
+		<import name="GetOEMCP" address="0xEA08" library="kernel32.dll"/>
+		<import name="IsValidCodePage" address="0xEA14" library="kernel32.dll"/>
+		<import name="LCMapStringA" address="0xEA26" library="kernel32.dll"/>
+		<import name="WideCharToMultiByte" address="0xEA36" library="kernel32.dll"/>
+		<import name="MultiByteToWideChar" address="0xEA4C" library="kernel32.dll"/>
+		<import name="LCMapStringW" address="0xEA62" library="kernel32.dll"/>
+		<import name="GetModuleFileNameW" address="0xEA72" library="kernel32.dll"/>
+		<import name="FreeEnvironmentStringsW" address="0xEA88" library="kernel32.dll"/>
+		<import name="GetEnvironmentStringsW" address="0xEAA2" library="kernel32.dll"/>
+		<import name="GetCommandLineW" address="0xEABC" library="kernel32.dll"/>
+		<import name="SetHandleCount" address="0xEACE" library="kernel32.dll"/>
+		<import name="GetFileType" address="0xEAE0" library="kernel32.dll"/>
+		<import name="GetStartupInfoA" address="0xEAEE" library="kernel32.dll"/>
+		<import name="HeapCreate" address="0xEB00" library="kernel32.dll"/>
+		<import name="VirtualFree" address="0xEB0E" library="kernel32.dll"/>
+		<import name="QueryPerformanceCounter" address="0xEB1C" library="kernel32.dll"/>
+		<import name="GetTickCount" address="0xEB36" library="kernel32.dll"/>
+		<import name="GetCurrentProcessId" address="0xEB46" library="kernel32.dll"/>
+		<import name="GetSystemTimeAsFileTime" address="0xEB5C" library="kernel32.dll"/>
+		<import name="VirtualAlloc" address="0xEB76" library="kernel32.dll"/>
+		<import name="HeapReAlloc" address="0xEB86" library="kernel32.dll"/>
+		<import name="HeapSize" address="0xEB94" library="kernel32.dll"/>
+		<import name="GetLocaleInfoA" address="0xEBA0" library="kernel32.dll"/>
+		<import name="GetStringTypeA" address="0xEBB2" library="kernel32.dll"/>
+		<import name="GetStringTypeW" address="0xEBC4" library="kernel32.dll"/>
+		<import name="RegisterWindowMessageW" address="0xE7D4" library="user32.dll"/>
+	</imports>
+	<exports>-</exports>
+	<relocations>-</relocations>
+	<exceptions>-</exceptions>
+	<resources>-</resources>
+	<manifest>-</manifest>
+	<debug>-</debug>
+	<strings>
+		<ascii count="565" bl="0">
+			<string bl="0">.This.program.cannot.be.run.in.DOS.mode.</string>
+			<string bl="0">RichL</string>
+			<string bl="0">.text</string>
+			<string bl="0">`.rdata</string>
+			<string bl="0">@.data</string>
+			<string bl="0">.rsrc</string>
+			<string bl="0">@.reloc</string>
+			<string bl="0">QSU3</string>
+			<string bl="0">J~HH</string>
+			<string bl="0">_^][Y</string>
+			<string bl="0">N.W3</string>
+			<string bl="0">t.lU</string>
+			<string bl="0">t.lU</string>
+			<string bl="0">_^][</string>
+			<string bl="0">_^][</string>
+			<string bl="0">D.|SU3</string>
+			<string bl="0">D.4s</string>
+			<string bl="0">D.4P</string>
+			<string bl="0">L.pS</string>
+			<string bl="0">\.0f</string>
+			<string bl="0">9t..r</string>
+			<string bl="0">D.49t.Hs</string>
+			<string bl="0">D.4P</string>
+			<string bl="0">L.TS</string>
+			<string bl="0">D.HP</string>
+			<string bl="0">\.0f</string>
+			<string bl="0">9t..r</string>
+			<string bl="0">D.49t.Hs</string>
+			<string bl="0">D.4P</string>
+			<string bl="0">9|.dr</string>
+			<string bl="0">L.PQ</string>
+			<string bl="0">\.`f</string>
+			<string bl="0">T.P9</string>
+			<string bl="0">D.lP</string>
+			<string bl="0">9\.Dv</string>
+			<string bl="0">D.4P</string>
+			<string bl="0">_^][3</string>
+			<string bl="0">t.SP</string>
+			<string bl="0">G0SP</string>
+			<string bl="0">_^][</string>
+			<string bl="0">Y_^[</string>
+			<string bl="0">N.9^</string>
+			<string bl="0">F._;</string>
+			<string bl="0">t.9^</string>
+			<string bl="0">9t..s</string>
+			<string bl="0">9t..r</string>
+			<string bl="0">D..SU</string>
+			<string bl="0">9l.0r</string>
+			<string bl="0">_^9l..r</string>
+			<string bl="0">L..][3</string>
+			<string bl="0">D..W</string>
+			<string bl="0">L.._3</string>
+			<string bl="0">][^_</string>
+			<string bl="0">D.4f</string>
+			<string bl="0">\..f</string>
+			<string bl="0">T.0R</string>
+			<string bl="0">|.D3</string>
+			<string bl="0">\.&lt;f</string>
+			<string bl="0">D..[r</string>
+			<string bl="0">L.DQ</string>
+			<string bl="0">D.8f</string>
+			<string bl="0">G`9t..r</string>
+			<string bl="0">9t.H^</string>
+			<string bl="0">l..]</string>
+			<string bl="0">\..f</string>
+			<string bl="0">L..Q</string>
+			<string bl="0">QWQS</string>
+			<string bl="0">_^][</string>
+			<string bl="0">SUVWu</string>
+			<string bl="0">_^][</string>
+			<string bl="0">_^][</string>
+			<string bl="0">L..Q</string>
+			<string bl="0">L.`3</string>
+			<string bl="0">D.T;</string>
+			<string bl="0">D.T;</string>
+			<string bl="0">D.T;</string>
+			<string bl="0">L..R</string>
+			<string bl="0">D.TP</string>
+			<string bl="0">T.0R</string>
+			<string bl="0">D..r</string>
+			<string bl="0">D.8;</string>
+			<string bl="0">D.8;</string>
+			<string bl="0">D.8;</string>
+			<string bl="0">L..R</string>
+			<string bl="0">D.8P</string>
+			<string bl="0">D.0PQ</string>
+			<string bl="0">T.&lt;VR</string>
+			<string bl="0">|.dP</string>
+			<string bl="0">D.8P</string>
+			<string bl="0">L..;H</string>
+			<string bl="0">D.8P</string>
+			<string bl="0">L.TQ</string>
+			<string bl="0">_^[3</string>
+			<string bl="0">UW;^</string>
+			<string bl="0">N.;H</string>
+			<string bl="0">9~.t.</string>
+			<string bl="0">V.;P</string>
+			<string bl="0">\...</string>
+			<string bl="0">L..RPQ</string>
+			<string bl="0">WUQP</string>
+			<string bl="0">Y_^[</string>
+			<string bl="0">Y_^[</string>
+			<string bl="0">QPQ.</string>
+			<string bl="0">Y_^[</string>
+			<string bl="0">D..8</string>
+			<string bl="0">L..Q</string>
+			<string bl="0">D..D</string>
+			<string bl="0">Y_^[</string>
+			<string bl="0">QWQR</string>
+			<string bl="0">D..U</string>
+			<string bl="0">D.@SV</string>
+			<string bl="0">L.L_^[3</string>
+			<string bl="0">f91t</string>
+			<string bl="0">tG9}</string>
+			<string bl="0">0WWWWW</string>
+			<string bl="0">_^[]</string>
+			<string bl="0">0WWWWW</string>
+			<string bl="0">X_^]</string>
+			<string bl="0">uBhCd@</string>
+			<string bl="0">hHC@</string>
+			<string bl="0">PPPPP</string>
+			<string bl="0">QQSVWd</string>
+			<string bl="0">QSVW</string>
+			<string bl="0">0SSSSS</string>
+			<string bl="0">_^[]</string>
+			<string bl="0">t.:a</string>
+			<string bl="0">QSVW</string>
+			<string bl="0">F\=.</string>
+			<string bl="0">VVVVV</string>
+			<string bl="0">PPPPP</string>
+			<string bl="0">&lt;v8V</string>
+			<string bl="0">VVVVV</string>
+			<string bl="0">VVVVV</string>
+			<string bl="0">VVVVV</string>
+			<string bl="0">_^[]</string>
+			<string bl="0">h@f@</string>
+			<string bl="0">Y_^[</string>
+			<string bl="0">Y_^[</string>
+			<string bl="0">h@f@</string>
+			<string bl="0">Y__^[</string>
+			<string bl="0">9csm</string>
+			<string bl="0">t.h.</string>
+			<string bl="0">S99t</string>
+			<string bl="0">j.hp</string>
+			<string bl="0">t.Ht</string>
+			<string bl="0">PPPPP</string>
+			<string bl="0">0A@@Ju</string>
+			<string bl="0">to=H</string>
+			<string bl="0">Y_^[]</string>
+			<string bl="0">_^[]</string>
+			<string bl="0">Fpt.</string>
+			<string bl="0">u8SS3</string>
+			<string bl="0">GWh.</string>
+			<string bl="0">9].u</string>
+			<string bl="0">9].SS</string>
+			<string bl="0">t.9]</string>
+			<string bl="0">t.SS9]</string>
+			<string bl="0">9].u</string>
+			<string bl="0">8csm</string>
+			<string bl="0">&gt;=Yt1j</string>
+			<string bl="0">tPVWP</string>
+			<string bl="0">PPPPP</string>
+			<string bl="0">Y[_^</string>
+			<string bl="0">j.@@</string>
+			<string bl="0">@@Bf</string>
+			<string bl="0">8.u8</string>
+			<string bl="0">j\Yf</string>
+			<string bl="0">t.9U</string>
+			<string bl="0">QQSVWh</string>
+			<string bl="0">@@f9</string>
+			<string bl="0">@@f9</string>
+			<string bl="0">j@j.^V</string>
+			<string bl="0">[j@j.</string>
+			<string bl="0">@_^]</string>
+			<string bl="0">=MOC</string>
+			<string bl="0">=csm</string>
+			<string bl="0">8csm</string>
+			<string bl="0">9csm</string>
+			<string bl="0">~SSV</string>
+			<string bl="0">~@;H</string>
+			<string bl="0">&gt;csm</string>
+			<string bl="0">taSV</string>
+			<string bl="0">YYPV</string>
+			<string bl="0">t.SV</string>
+			<string bl="0">Hu4j</string>
+			<string bl="0">&gt;MOC</string>
+			<string bl="0">s[S;7|G;w</string>
+			<string bl="0">9&gt;u.</string>
+			<string bl="0">YYh8</string>
+			<string bl="0">tR99u2</string>
+			<string bl="0">r.9Y</string>
+			<string bl="0">@_^[]</string>
+			<string bl="0">oV.f</string>
+			<string bl="0">o^0f</string>
+			<string bl="0">of@f</string>
+			<string bl="0">onPf</string>
+			<string bl="0">ov`f</string>
+			<string bl="0">o~pf</string>
+			<string bl="0">ueSj</string>
+			<string bl="0">@_^[</string>
+			<string bl="0">.VW}</string>
+			<string bl="0">j?^;</string>
+			<string bl="0">URPQQh</string>
+			<string bl="0">L..3</string>
+			<string bl="0">UVWS</string>
+			<string bl="0">[_^]</string>
+			<string bl="0">SVWj</string>
+			<string bl="0">_^[]</string>
+			<string bl="0">u.9E</string>
+			<string bl="0">WWWWW</string>
+			<string bl="0">0SSSSS</string>
+			<string bl="0">_^[]</string>
+			<string bl="0">_^[]</string>
+			<string bl="0">0SSSSS</string>
+			<string bl="0">VVVVV</string>
+			<string bl="0">FVh.</string>
+			<string bl="0">9].SS</string>
+			<string bl="0">v.;5l</string>
+			<string bl="0">PPPPPPPP</string>
+			<string bl="0">PPPPPPPP</string>
+			<string bl="0">WWWWV</string>
+			<string bl="0">t&lt;Vj</string>
+			<string bl="0">t.WWVPV</string>
+			<string bl="0">SVW3</string>
+			<string bl="0">0WWWWW</string>
+			<string bl="0">_^[]</string>
+			<string bl="0">AAFFf;</string>
+			<string bl="0">SVWUj</string>
+			<string bl="0">]_^[</string>
+			<string bl="0">;t..v.</string>
+			<string bl="0">UQPXY]Y[</string>
+			<string bl="0">N.D.</string>
+			<string bl="0">WWWWW</string>
+			<string bl="0">uaVj</string>
+			<string bl="0">uL9=.</string>
+			<string bl="0">wIVSP</string>
+			<string bl="0">FVSj</string>
+			<string bl="0">WWWWW</string>
+			<string bl="0">u.9u</string>
+			<string bl="0">^_[3</string>
+			<string bl="0">string.too.long</string>
+			<string bl="0">invalid.string.position</string>
+			<string bl="0">Unknown.exception</string>
+			<string bl="0">CorExitProcess</string>
+			<string bl="0">EncodePointer</string>
+			<string bl="0">DecodePointer</string>
+			<string bl="0">FlsFree</string>
+			<string bl="0">FlsSetValue</string>
+			<string bl="0">FlsGetValue</string>
+			<string bl="0">FlsAlloc</string>
+			<string bl="0">runtime.error.</string>
+			<string bl="0">TLOSS.error</string>
+			<string bl="0">SING.error</string>
+			<string bl="0">DOMAIN.error</string>
+			<string bl="0">R6034</string>
+			<string bl="0">An.application.has.made.an.attempt.to.load.the.C.runtime.library.incorrectly.</string>
+			<string bl="0">Please.contact.the.application.s.support.team.for.more.information.</string>
+			<string bl="0">R6033</string>
+			<string bl="0">..Attempt.to.use.MSIL.code.from.this.assembly.during.native.code.initialization</string>
+			<string bl="0">This.indicates.a.bug.in.your.application..It.is.most.likely.the.result.of.calling.an.MSIL.compiled...clr..function.from.a.native.constructor.or.from.DllMain.</string>
+			<string bl="0">R6032</string>
+			<string bl="0">..not.enough.space.for.locale.information</string>
+			<string bl="0">R6031</string>
+			<string bl="0">..Attempt.to.initialize.the.CRT.more.than.once.</string>
+			<string bl="0">This.indicates.a.bug.in.your.application.</string>
+			<string bl="0">R6030</string>
+			<string bl="0">..CRT.not.initialized</string>
+			<string bl="0">R6028</string>
+			<string bl="0">..unable.to.initialize.heap</string>
+			<string bl="0">R6027</string>
+			<string bl="0">..not.enough.space.for.lowio.initialization</string>
+			<string bl="0">R6026</string>
+			<string bl="0">..not.enough.space.for.stdio.initialization</string>
+			<string bl="0">R6025</string>
+			<string bl="0">..pure.virtual.function.call</string>
+			<string bl="0">R6024</string>
+			<string bl="0">..not.enough.space.for._onexit.atexit.table</string>
+			<string bl="0">R6019</string>
+			<string bl="0">..unable.to.open.console.device</string>
+			<string bl="0">R6018</string>
+			<string bl="0">..unexpected.heap.error</string>
+			<string bl="0">R6017</string>
+			<string bl="0">..unexpected.multithread.lock.error</string>
+			<string bl="0">R6016</string>
+			<string bl="0">..not.enough.space.for.thread.data</string>
+			<string bl="0">This.application.has.requested.the.Runtime.to.terminate.it.in.an.unusual.way.</string>
+			<string bl="0">Please.contact.the.application.s.support.team.for.more.information.</string>
+			<string bl="0">R6009</string>
+			<string bl="0">..not.enough.space.for.environment</string>
+			<string bl="0">R6008</string>
+			<string bl="0">..not.enough.space.for.arguments</string>
+			<string bl="0">R6002</string>
+			<string bl="0">..floating.point.support.not.loaded</string>
+			<string bl="0">Microsoft.Visual.C...Runtime.Library</string>
+			<string bl="0">&lt;program.name.unknown&gt;</string>
+			<string bl="0">Runtime.Error.</string>
+			<string bl="0">Program:.</string>
+			<string bl="0">................0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~</string>
+			<string bl="0">bad.exception</string>
+			<string bl="0">.Complete.Object.Locator.</string>
+			<string bl="0">.Class.Hierarchy.Descriptor.</string>
+			<string bl="0">.Base.Class.Array.</string>
+			<string bl="0">.Base.Class.Descriptor.at..</string>
+			<string bl="0">.Type.Descriptor.</string>
+			<string bl="0">`local.static.thread.guard.</string>
+			<string bl="0">`managed.vector.copy.constructor.iterator.</string>
+			<string bl="0">`vector.vbase.copy.constructor.iterator.</string>
+			<string bl="0">`vector.copy.constructor.iterator.</string>
+			<string bl="0">`dynamic.atexit.destructor.for..</string>
+			<string bl="0">`dynamic.initializer.for..</string>
+			<string bl="0">`eh.vector.vbase.copy.constructor.iterator.</string>
+			<string bl="0">`eh.vector.copy.constructor.iterator.</string>
+			<string bl="0">`managed.vector.destructor.iterator.</string>
+			<string bl="0">`managed.vector.constructor.iterator.</string>
+			<string bl="0">`placement.delete[].closure.</string>
+			<string bl="0">`placement.delete.closure.</string>
+			<string bl="0">`omni.callsig.</string>
+			<string bl="0">.delete[]</string>
+			<string bl="0">.new[]</string>
+			<string bl="0">`local.vftable.constructor.closure.</string>
+			<string bl="0">`local.vftable.</string>
+			<string bl="0">`RTTI</string>
+			<string bl="0">`udt.returning.</string>
+			<string bl="0">`copy.constructor.closure.</string>
+			<string bl="0">`eh.vector.vbase.constructor.iterator.</string>
+			<string bl="0">`eh.vector.destructor.iterator.</string>
+			<string bl="0">`eh.vector.constructor.iterator.</string>
+			<string bl="0">`virtual.displacement.map.</string>
+			<string bl="0">`vector.vbase.constructor.iterator.</string>
+			<string bl="0">`vector.destructor.iterator.</string>
+			<string bl="0">`vector.constructor.iterator.</string>
+			<string bl="0">`scalar.deleting.destructor.</string>
+			<string bl="0">`default.constructor.closure.</string>
+			<string bl="0">`vector.deleting.destructor.</string>
+			<string bl="0">`vbase.destructor.</string>
+			<string bl="0">`string.</string>
+			<string bl="0">`local.static.guard.</string>
+			<string bl="0">`typeof.</string>
+			<string bl="0">`vcall.</string>
+			<string bl="0">`vbtable.</string>
+			<string bl="0">`vftable.</string>
+			<string bl="0">operator</string>
+			<string bl="0">.delete</string>
+			<string bl="0">.new</string>
+			<string bl="0">__unaligned</string>
+			<string bl="0">__restrict</string>
+			<string bl="0">__ptr64</string>
+			<string bl="0">__clrcall</string>
+			<string bl="0">__fastcall</string>
+			<string bl="0">__thiscall</string>
+			<string bl="0">__stdcall</string>
+			<string bl="0">__pascal</string>
+			<string bl="0">__cdecl</string>
+			<string bl="0">__based.</string>
+			<string bl="0">GetProcessWindowStation</string>
+			<string bl="0">GetUserObjectInformation</string>
+			<string bl="0">GetLastActivePopup</string>
+			<string bl="0">GetActiveWindow</string>
+			<string bl="0">MessageBox</string>
+			<string bl="0">USER32.DLL</string>
+			<string bl="0">................0123456789:;&lt;=&gt;?@abcdefghijklmnopqrstuvwxyz[\]^_`abcdefghijklmnopqrstuvwxyz{|}~</string>
+			<string bl="0">................0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`ABCDEFGHIJKLMNOPQRSTUVWXYZ{|}~</string>
+			<string bl="0">HH:mm:ss</string>
+			<string bl="0">dddd..MMMM.dd..yyyy</string>
+			<string bl="0">MM.dd.yy</string>
+			<string bl="0">December</string>
+			<string bl="0">November</string>
+			<string bl="0">October</string>
+			<string bl="0">September</string>
+			<string bl="0">August</string>
+			<string bl="0">July</string>
+			<string bl="0">June</string>
+			<string bl="0">April</string>
+			<string bl="0">March</string>
+			<string bl="0">February</string>
+			<string bl="0">January</string>
+			<string bl="0">Saturday</string>
+			<string bl="0">Friday</string>
+			<string bl="0">Thursday</string>
+			<string bl="0">Wednesday</string>
+			<string bl="0">Tuesday</string>
+			<string bl="0">Monday</string>
+			<string bl="0">Sunday</string>
+			<string bl="0">SunMonTueWedThuFriSat</string>
+			<string bl="0">JanFebMarAprMayJunJulAugSepOctNovDec</string>
+			<string bl="0">bad.allocation</string>
+			<string bl="0">kernel32</string>
+			<string bl="0">GetStdHandle</string>
+			<string bl="0">GetConsoleMode</string>
+			<string bl="0">WriteConsole</string>
+			<string bl="0">vector&lt;T&gt;.too.long</string>
+			<string bl="0">create</string>
+			<string bl="0">peparser</string>
+			<string bl="0">FreeLibrary</string>
+			<string bl="0">GetLastError</string>
+			<string bl="0">GetProcAddress</string>
+			<string bl="0">LoadLibrary</string>
+			<string bl="0">CloseHandle</string>
+			<string bl="0">Sleep</string>
+			<string bl="0">KERNEL32.dll</string>
+			<string bl="0">RegisterWindowMessage</string>
+			<string bl="0">USER32.dll</string>
+			<string bl="0">GetModuleHandle</string>
+			<string bl="0">ExitProcess</string>
+			<string bl="0">TerminateProcess</string>
+			<string bl="0">GetCurrentProcess</string>
+			<string bl="0">UnhandledExceptionFilter</string>
+			<string bl="0">SetUnhandledExceptionFilter</string>
+			<string bl="0">IsDebuggerPresent</string>
+			<string bl="0">RaiseException</string>
+			<string bl="0">RtlUnwind</string>
+			<string bl="0">HeapAlloc</string>
+			<string bl="0">HeapFree</string>
+			<string bl="0">TlsGetValue</string>
+			<string bl="0">TlsAlloc</string>
+			<string bl="0">TlsSetValue</string>
+			<string bl="0">TlsFree</string>
+			<string bl="0">InterlockedIncrement</string>
+			<string bl="0">SetLastError</string>
+			<string bl="0">GetCurrentThreadId</string>
+			<string bl="0">InterlockedDecrement</string>
+			<string bl="0">WriteFile</string>
+			<string bl="0">GetStdHandle</string>
+			<string bl="0">GetModuleFileName</string>
+			<string bl="0">DeleteCriticalSection</string>
+			<string bl="0">LeaveCriticalSection</string>
+			<string bl="0">EnterCriticalSection</string>
+			<string bl="0">InitializeCriticalSectionAndSpinCount</string>
+			<string bl="0">GetCPInfo</string>
+			<string bl="0">GetACP</string>
+			<string bl="0">GetOEMCP</string>
+			<string bl="0">IsValidCodePage</string>
+			<string bl="0">LCMapString</string>
+			<string bl="0">WideCharToMultiByte</string>
+			<string bl="0">MultiByteToWideChar</string>
+			<string bl="0">LCMapString</string>
+			<string bl="0">GetModuleFileName</string>
+			<string bl="0">FreeEnvironmentStrings</string>
+			<string bl="0">GetEnvironmentStrings</string>
+			<string bl="0">GetCommandLine</string>
+			<string bl="0">SetHandleCount</string>
+			<string bl="0">GetFileType</string>
+			<string bl="0">GetStartupInfo</string>
+			<string bl="0">HeapCreate</string>
+			<string bl="0">VirtualFree</string>
+			<string bl="0">QueryPerformanceCounter</string>
+			<string bl="0">GetTickCount</string>
+			<string bl="0">GetCurrentProcessId</string>
+			<string bl="0">GetSystemTimeAsFileTime</string>
+			<string bl="0">VirtualAlloc</string>
+			<string bl="0">HeapReAlloc</string>
+			<string bl="0">HeapSize</string>
+			<string bl="0">GetLocaleInfo</string>
+			<string bl="0">GetStringType</string>
+			<string bl="0">GetStringType</string>
+			<string bl="0">.?AVout_of_range@std@@</string>
+			<string bl="0">.?AVtype_info@@</string>
+			<string bl="0">..........................</string>
+			<string bl="0">abcdefghijklmnopqrstuvwxyz</string>
+			<string bl="0">ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+			<string bl="0">..........................</string>
+			<string bl="0">abcdefghijklmnopqrstuvwxyz</string>
+			<string bl="0">ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+			<string bl="0">.?AVbad_exception@std@@</string>
+			<string bl="0">.?AVexception@std@@</string>
+			<string bl="0">.?AVbad_alloc@std@@</string>
+			<string bl="0">.?AVlogic_error@std@@</string>
+			<string bl="0">.?AVlength_error@std@@</string>
+			<string bl="0">&lt;assembly.xmlns=.urn:schemas.microsoft.com:asm.v1..manifestVersion=.1.0.&gt;</string>
+			<string bl="0">..&lt;trustInfo.xmlns=.urn:schemas.microsoft.com:asm.v3.&gt;</string>
+			<string bl="0">....&lt;security&gt;</string>
+			<string bl="0">......&lt;requestedPrivileges&gt;</string>
+			<string bl="0">........&lt;requestedExecutionLevel.level=.asInvoker..uiAccess=.false.&gt;&lt;.requestedExecutionLevel&gt;</string>
+			<string bl="0">......&lt;.requestedPrivileges&gt;</string>
+			<string bl="0">....&lt;.security&gt;</string>
+			<string bl="0">..&lt;.trustInfo&gt;</string>
+			<string bl="0">&lt;.assembly&gt;PAPADDINGXXPADDINGPADDINGXXPADDINGPADDINGXXPADDING</string>
+			<string bl="0">141S1</string>
+			<string bl="0">2]3u3</string>
+			<string bl="0">4^5J6v;</string>
+			<string bl="0">=.=I=</string>
+			<string bl="0">&gt;0&gt;T&gt;</string>
+			<string bl="0">&gt;.?N?n?|?</string>
+			<string bl="0">00@0N0\0</string>
+			<string bl="0">3.4.5z5</string>
+			<string bl="0">.38395o5</string>
+			<string bl="0">656F6X6</string>
+			<string bl="0">:5:;:C:Q:e:o:x:</string>
+			<string bl="0">;8;z;</string>
+			<string bl="0">=.=.=H=Y=c=</string>
+			<string bl="0">=.&gt;7&gt;</string>
+			<string bl="0">0.0U0[0c0p0</string>
+			<string bl="0">2.2.272G2\2</string>
+			<string bl="0">7.7&lt;7C7I7[7c7n7</string>
+			<string bl="0">8.9_9</string>
+			<string bl="0">&gt;.&gt;.&gt;5&gt;&gt;&gt;C&gt;I&gt;S&gt;\&gt;g&gt;s&gt;x&gt;</string>
+			<string bl="0">?8???G?L?P?T?}?</string>
+			<string bl="0">.04080&lt;0@0</string>
+			<string bl="0">1.1]1d1h1l1p1t1x1|1</string>
+			<string bl="0">122N2q2</string>
+			<string bl="0">2G3M3m3</string>
+			<string bl="0">4_4e4v4</string>
+			<string bl="0">4:5o5</string>
+			<string bl="0">6.6.6.6.60646~6</string>
+			<string bl="0">7.7.7.707Q7{7</string>
+			<string bl="0">8.8.8.8.8x8</string>
+			<string bl="0">:.:J:O:f:</string>
+			<string bl="0">;.;.;B;I;p;v;</string>
+			<string bl="0">&lt;.&lt;2&lt;8&lt;D&lt;J&lt;W&lt;a&lt;h&lt;</string>
+			<string bl="0">=A=G=q=w=</string>
+			<string bl="0">=K&gt;n&gt;x&gt;</string>
+			<string bl="0">?.?.?1?7?&gt;?D?K?Q?Y?`?e?m?v?</string>
+			<string bl="0">0.0.0O0U0q0</string>
+			<string bl="0">1.1.181x1}1</string>
+			<string bl="0">2.2P2u2|2</string>
+			<string bl="0">3.3.3=3a3</string>
+			<string bl="0">4.4.4G4L4q4.5.5?5]5q5w5</string>
+			<string bl="0">5R6.747L7d7</string>
+			<string bl="0">8.8Q8\8}8</string>
+			<string bl="0">:.:n:s:</string>
+			<string bl="0">:D;M;S;</string>
+			<string bl="0">?A?L?V?o?y?</string>
+			<string bl="0">2.252P2X2`2w2</string>
+			<string bl="0">2.393\3.4K4</string>
+			<string bl="0">415y5</string>
+			<string bl="0">9e;w;</string>
+			<string bl="0">;i&lt;v&lt;</string>
+			<string bl="0">=.=u=</string>
+			<string bl="0">?.?.?.?</string>
+			<string bl="0">0.0D0J0|0</string>
+			<string bl="0">1.1M1f1</string>
+			<string bl="0">1;2A2w2|2</string>
+			<string bl="0">393F3Y3.4G5@6</string>
+			<string bl="0">1N2\2a2</string>
+			<string bl="0">5.575=5C5H5Q5n5t5</string>
+			<string bl="0">6.6.6&lt;6</string>
+			<string bl="0">6=:I:|:</string>
+			<string bl="0">&gt;.&gt;.?m?v?</string>
+			<string bl="0">050m0</string>
+			<string bl="0">1.121A1G1V1\1j1s1</string>
+			<string bl="0">4P5]7o7</string>
+			<string bl="0">9;9H9.:6:</string>
+			<string bl="0">&gt;T&gt;Z&gt;f&gt;</string>
+			<string bl="0">050i0o0{0</string>
+			<string bl="0">0M3T3</string>
+			<string bl="0">525R5]5a5f5</string>
+			<string bl="0">1.1.1014181&lt;1@1D1H1L1P1T1</string>
+			<string bl="0">1.9.90949</string>
+			<string bl="0">?.?.?.?.?0?4?8?&lt;?@?D?H?L?P?T?X?\?`?d?h?l?p?t?x?|?</string>
+			<string bl="0">0.0.0.0.0004080&lt;0@0D0H0L0P0T0X0\0\:.&lt;.&lt;@&lt;D&lt;H&lt;L&lt;P&lt;T&lt;X&lt;\&lt;`&lt;</string>
+			<string bl="0">=.=4=8=H=L=P=X=p=t=</string>
+			<string bl="0">&gt;.&gt;.&gt;@&gt;P&gt;T&gt;d&gt;h&gt;l&gt;p&gt;x&gt;</string>
+			<string bl="0">?.?8?|?</string>
+			<string bl="0">080X0x0</string>
+			<string bl="0">1.1.1D1H1d1h1</string>
+			<string bl="0">2.2.2H2P2T2l2p2</string>
+			<string bl="0">3.30383@3H3L3T3h3</string>
+			<string bl="0">4.4.4.444&lt;4D4X4`4t4|4</string>
+			<string bl="0">5P5`5t5</string>
+			<string bl="0">6.6.6</string>
+			<string bl="0">0.0.0.0D0H0</string>
+			<string bl="0">2.2.242&lt;2D2L2T2\2d2l2t2|2</string>
+			<string bl="0">:\:`:</string>
+			<string bl="0">;.;.;.;.;0;@;H;L;P;T;X;\;`;d;h;l;x;0&lt;4&lt;</string>
+			<string bl="0">=.=&lt;=X=x=</string>
+		</ascii>
+		<unicode>-</unicode>
+	</strings>
+	<tls-callbacks>-</tls-callbacks>
+	<file-version>-</file-version>
+	<overlay>-</overlay>
+</image>
