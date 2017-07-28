@@ -100,10 +100,11 @@ namespace RedInks.Models
             this.DsisJudgement = Judge.Pending;
             this.DsisTitle = doit.Title;
             this.DsisCode = doit.Code;
-            this.DsisProofs = new Dictionary<String, List<String>>();
+            this.DsisProofs = null;
             this.Doit = doit;
             doit.AssignCallback((Status status) =>
             {
+
                 this.DsisStatus = status;
             });
 
@@ -165,7 +166,6 @@ namespace RedInks.Models
             System.Windows.MessageBox.Show(Message);
         }
         public abstract void Parse();
-
 
         public abstract void Judge();
     }
