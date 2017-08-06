@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CheckList>
+  <Item code="MA-001" title="인터넷 익스플로러 취약성 점검">
+    <help>인터넷 익스플로러의 잠재적인 취약성을 판별 </help>
+    <utility>
+      <util type="util1" name="reg.exe">
+        <param name="hive" value="HKLM"></param>
+        <param name="key" value="SOFTWARE\Microsoft\Internet Explorer"></param>
+        <param name="out" value=""></param>
+      </util>
+    </utility>
+    <output>
+      <column type="col1" key="" name="TODO"></column>
+      <column type="col2" name="TODO"></column>
+    </output>
+  </Item>
+
+  <Item code="MA-002" title="말버타이징 위험 노출 점검">
+    <help>과거 캐시 이력을 확인하여 악성 광고네트워크에 접근하였던 이력을 확인</help>
+    <utility>
+      <!-- 말버타이징의 경우 일시적으로 광고 배너에 의해 악성 도메인에 노출되는 것을 의미하며
+      사후약방문성격이 강하다. 하지만, 이러한 도메인에 노출되게 된 호스트의 목록을 수집하고 교육을 강화하면 좋을 듯-->
+      <util type="util1" name="chromecacheview.exe">
+        <param name="xml" value="/sxml"></param>
+        <param name="out" value="ChromeCache.xml"></param>
+      </util>
+      <util type="util2" name="iecacheview.exe">
+        <param name="xml" value="/sxml"></param>
+        <param name="out" value="IeCache.xml"></param>
+      </util>
+    </utility>
+    <output>
+      <column type="col1" key="" name="TODO"></column>
+      <column type="col2" name="TODO"></column>
+    </output>
+  </Item>
+
+  <Item code="MA-003" title="유해 사이트 노출 점검">
+    <help>유해사이트에 접근한 과거 이력을 검토하여 유해사이트에 대한 접근 금지 권고를 내림</help>
+    <utility>
+      <!-- TODO -->
+      <util type="util1" name="chromecacheview.exe">
+        <param name="xml" value="/sxml"></param>
+        <param name="out" value="ChromeCache.xml"></param>
+      </util>
+      <util type="util2" name="iecacheview.exe">
+        <param name="xml" value="/stab"></param>
+        <param name="out" value="IeCache.xml"></param>
+      </util>
+    </utility>
+    <output>
+      <column type="col1" key="" name="TODO"></column>
+      <column type="col2" name="TODO"></column>
+    </output>
+  </Item>
+
+  <Item code="MA-004" title="윈도우 업데이트 현황 점검">
+    <help>윈도우 업데이트 설치현황을 확인 후 강제 다운로드를 수행 (관리자 권한 요구)</help>
+    <utility>
+      <!-- TODO -->
+      <util type="util1" name="">
+        <param name="xml" value=""></param>
+        <param name="out" value=""></param>
+      </util>
+      <util type="util2" name="">
+        <param name="xml" value=""></param>
+        <param name="out" value=""></param>
+      </util>
+    </utility>
+    <output>
+      <column type="col1" key="" name="TODO"></column>
+      <column type="col2" name="TODO"></column>
+    </output>
+  </Item>
+
+  <Item code="MA-005" title="보안프로그램 설치 현황 점검">
+    <help>보안프로그램 설치 현황을 확인</help>
+    <utility>
+      <!-- TODO -->
+      <util type="util1" name="">
+        <param name="xml" value=""></param>
+        <param name="out" value=""></param>
+      </util>
+      <util type="util2" name="">
+        <param name="xml" value=""></param>
+        <param name="out" value=""></param>
+      </util>
+    </utility>
+    <output>
+      <column type="col1" key="" name="TODO"></column>
+      <column type="col2" name="TODO"></column>
+    </output>
+  </Item>
+
+  <Item code="MA-006" title="방화벽 예외 어플리케이션 현황 점검">
+    <help>방화벽 예외 어플리케이션 현황을 확인 후 악성 소프트웨어 여부를 점검</help>
+    <utility>
+      <!-- TODO -->
+      <util type="util1" name="">
+        <param name="xml" value=""></param>
+        <param name="out" value=""></param>
+      </util>
+      <util type="util2" name="">
+        <param name="xml" value=""></param>
+        <param name="out" value=""></param>
+      </util>
+    </utility>
+    <output>
+      <column type="col1" key="" name="TODO"></column>
+      <column type="col2" name="TODO"></column>
+    </output>
+  </Item>
+
+  <Item code="MA-007" title="사용자 행위 추적">
+    <help>사용자 행위 중에서 일반적인 사용자가 하지 않을 행위를 검토</help>
+    <utility>
+      <!-- TODO -->
+      <util type="util1" name="">
+        <param name="xml" value=""></param>
+        <param name="out" value=""></param>
+      </util>
+      <util type="util2" name="">
+        <param name="xml" value=""></param>
+        <param name="out" value=""></param>
+      </util>
+    </utility>
+    <output>
+      <column type="col1" key="" name="TODO"></column>
+      <column type="col2" name="TODO"></column>
+    </output>
+  </Item>
+
+  <Item code="MA-008" title="블랙리스트 소프트웨어 설치 점검">
+    <help>블랙리스트 목록 내의 소프트웨어가 존재할 경우 취약</help>
+    <utility>
+      <!-- 윈도우 프로그램 설치 및 제거 목록을 확인하여 블랙리스트 목록을 최대한 도출 
+      이외에도 exe, dll 등의 파일에 대한 서명 체크를 실시하여 서명되지 않은 경우 VT 스캔을 통해 악성 파일 도출-->
+      <util type="util1" name="lastactivityview.exe">
+        <param name="xml" value="/sxml"></param>
+        <param name="out" value="UserActivity.xml"></param>
+      </util>
+    </utility>
+    <output>
+      <column type="col1" key="" name="설치된 소프트웨어 목록"></column>
+      <column type="col2" name="악성 여부"></column>
+    </output>
+  </Item>
+
+  <Item code="MA-009" title="중요 이벤트에 대한 로그를 수집">
+    <help>윈도우 이벤트 중 원격접속 및 출근 시간외에 수상한 행위를 수행한 경우 검토가 필요</help>
+    <utility>
+      <!-- TODO -->
+      <util type="util1" name="lastactivityview.exe">
+        <param name="xml" value="/sxml"></param>
+        <param name="out" value="UserActivity.xml"></param>
+      </util>
+    </utility>
+    <output>
+      <column type="col1" key="" name="설치된 소프트웨어 목록"></column>
+      <column type="col2" name="악성 여부"></column>
+    </output>
+  </Item>
+
+</CheckList>

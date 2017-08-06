@@ -1,4 +1,5 @@
-﻿using Mono.Posix;
+﻿using BlueInks.Data;
+using Mono.Posix;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,12 +10,75 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace BlueInksTest
 {
     class Program
     {
         static void Main(string[] args)
+        {
+            int ws = 0;
+            int pi = 0;
+            int dc = 0;
+            int cc = 0;
+            int ac = 0;
+            int et = 0;
+            int el = 0;
+            int xd = 0;
+            // Read XML Data
+            // LastAction action = new LastAction();
+            XmlDocument doc = new XmlDocument();
+            doc.Load("C:\\Samples\\LastAction-Sample.xml");
+
+            XmlNode root = doc.DocumentElement;
+            XmlNodeList list = root.SelectNodes("//item");
+            SortableLastAction collection = new SortableLastAction();
+            foreach(XmlNode node in list)
+            {
+                if (node.HasChildNodes)
+                {
+                    var time = node["action_time"].InnerText;
+                    var desc = node["description"].InnerText;
+                    var filename = node["filename"].InnerText;
+                    var fullpath = node["full_path"].InnerText;
+                    var extension = node["file_extension"].InnerText;
+                    var more_info = node["more_information"].InnerText;
+                    //Console.WriteLine(time);
+                    DateTime dt = new DateTime();
+                    DateTime.TryParse(time, null, System.Globalization.DateTimeStyles.AssumeLocal, out dt);
+
+                    collection.ActionCollection.Add(new LastAction(time, desc, filename, fullpath, extension));
+                }
+            }
+
+            var Serializer = new XmlSerializer(typeof(SortableLastAction));
+            using (var fStream = new FileStream("C:\\Samples\\SerializedTest.xml", FileMode.Create))
+                Serializer.Serialize(fStream, collection);
+
+            var Serializer2 = new XmlSerializer(typeof(SortableLastAction));
+            SortableLastAction collection2;
+            using (var fStream = new FileStream("C:\\Samples\\SerializedTest.xml", FileMode.Open))
+                collection2 = (SortableLastAction)Serializer2.Deserialize(fStream);
+            if (collection2 != null)
+            {
+                // C# List Sort API 조사 및 적용 해보기
+                collection2.ActionCollection.Sort(delegate (LastAction a1, LastAction a2) {
+                    if (a1.ActionTime == null && a2.ActionTime == null) return 0;
+                    else if (a1.ActionTime == null) return -1;
+                    else if (a2.ActionTime == null) return 1;
+                    else return a1.ActionTime.CompareTo(a2.ActionTime);
+                });
+                collection2.ActionCollection.Reverse();
+                foreach(var item in collection2.ActionCollection)
+                {
+                    Console.WriteLine(item.ActionTime);   
+                }
+            }
+
+        }
+        static void Main2(string[] args)
         {
             /*
             var host = Dns.GetHostEntry(Dns.GetHostName());

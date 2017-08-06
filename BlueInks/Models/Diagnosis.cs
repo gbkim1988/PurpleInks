@@ -1,4 +1,5 @@
 ﻿using BlueInks;
+using BlueInks.Models;
 using RedInks.Utils;
 using System;
 using System.Collections.Generic;
@@ -79,8 +80,8 @@ namespace RedInks.Models
                 RaisePropertyChanged("DsisCode");
             }
         }
-        private Dictionary<String, List<String>> _DsisProofs;
-        public Dictionary<String, List<String>> DsisProofs {
+        private List<Dictionary<String, String>> _DsisProofs;
+        public List<Dictionary<String, String>> DsisProofs {
             get
             {
                 return _DsisProofs;
@@ -124,12 +125,8 @@ namespace RedInks.Models
         public String Code;
         public Action<Status> Callback;
         public Status DoItStatus;
-        public DoIt(Action<Status> callback = null) {
-            this.Title = "";
-            this.Code = "";
-            this.DoItStatus = Status.Pending;
-            this.Callback = callback;
-        }
+        public DoitSettings Setting;
+        // 추상 클래스에 생성자가 필요할까?
 
         public void AssignCallback(Action<Status> callback) {
             this.Callback = callback;
@@ -171,9 +168,13 @@ namespace RedInks.Models
     }
 
     public class MA001 : DoIt {
-        public MA001() {
+        public MA001(DoitSettings setting, Action<Status> callback = null) {
+            
             Title = "브라우저 유해 사이트 접근 이력 확인";
             Code = "MA001";
+            this.DoItStatus = Status.Pending;
+            this.Callback = null;
+            this.Setting = setting;
         }
         public override bool Available()
         {
@@ -186,6 +187,7 @@ namespace RedInks.Models
         {
             
         }
+
         public override void ExecuteCommand()
         {
             ExecuteProcess.ExecuteCallback(Path.Combine(Directory.GetCurrentDirectory(), "bin"), "lastactivityview.exe", new List<String> { "/sxml", "c:\\TESTMODY.xml"}, NotifyStatusCallback);
@@ -199,10 +201,13 @@ namespace RedInks.Models
 
     public class MA002 : DoIt
     {
-        public MA002()
+        public MA002(DoitSettings setting, Action<Status> callback = null)
         {
             Title = "기본 테스트2";
             Code = "MA-002";
+            this.DoItStatus = Status.Pending;
+            this.Callback = null;
+            this.Setting = setting;
         }
         public override bool Available()
         {

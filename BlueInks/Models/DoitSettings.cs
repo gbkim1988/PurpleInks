@@ -9,17 +9,24 @@ namespace BlueInks.Models
 {
     public class DoitSettings
     {
-        // 실행 프로그램 이름
-        public String BinaryName;
         // 기본 디렉터리 경로
         public String Basement;
-        public String FullExePath;
         // 
-        public DoitSettings(String ExeFile = null)
+        public String BinaryBase;
+        public String LogBase;
+
+        public DoitSettings()
         {
-            this.Basement = Path.Combine(Directory.GetCurrentDirectory(), "bin");
-            this.BinaryName = ExeFile;
-            this.FullExePath = Path.Combine(this.Basement, this.BinaryName);
+            this.Basement = Directory.GetCurrentDirectory();
+            this.BinaryBase = Path.Combine(this.Basement, "bin");
+            this.LogBase = Path.Combine(this.Basement, "log");
+
         }
+
+        public String GetExeFilePath(String BinaryFileName)
+        {
+            return Path.Combine(this.Basement, BinaryFileName);
+        }
+
     }
 }

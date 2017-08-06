@@ -12,12 +12,16 @@ namespace BlueInks.Models
         /*
             Factory Pattern 을 이용하여, 진단 클래스의 인스턴스 생성을 용이하게 한다.
          */
-        public Diagnosis GetInstances(String code) {
+        public DoitSettings Setting;
+        public DiagnosisFactory(DoitSettings setting) {
+            this.Setting = setting;
+        }
+        public Diagnosis GetInstances(String code, ) {
             switch(code){
                 case "MA001":
-                    return new Diagnosis(new MA001());
+                    return new Diagnosis(new MA001(this.Setting));
                 case "MA002":
-                    return new Diagnosis(new MA002());
+                    return new Diagnosis(new MA002(this.Setting));
                 default:
                     return null;
             }
