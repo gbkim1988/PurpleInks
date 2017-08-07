@@ -74,6 +74,42 @@ namespace GreyInks
             }
         }
 
+        public static void ExecutedWithOutput(string basement, string binary, string argument, out string output)
+        {
+            String ExePath = Path.Combine(basement, binary);
+            string tmp = "";
+            if (File.Exists(ExePath))
+            {
+                try
+                {
+                    var process = new Process
+                    {
+                        StartInfo = {
+                            FileName = ExePath,
+                            Arguments = String.Join(" ", argument),
+                            UseShellExecute = false,
+                            RedirectStandardOutput = true,
+                            RedirectStandardError = true,
+                            RedirectStandardInput = true,
+                            WindowStyle = ProcessWindowStyle.Minimized
+                        },
+                        EnableRaisingEvents = true,
+                    };
+
+                    // 프로세스 시작
+                    process.Start();
+                    tmp = process.StandardOutput.ReadToEnd();
+                    process.WaitForExit();
+                    
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+            output = tmp;
+        }
+
         public static GreyCommand Instance { get; private set; }
         public static void Default()
         {

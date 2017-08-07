@@ -25,7 +25,7 @@
         <param name="out" value="ChromeCache.xml"></param>
       </util>
       <util type="util2" name="iecacheview.exe">
-        <param name="xml" value="/sxml"></param>
+        <param name="xml" value="/stab"></param>
         <param name="out" value="IeCache.xml"></param>
       </util>
     </utility>
@@ -92,35 +92,16 @@
     </output>
   </Item>
 
-  <Item code="MA-006" title="방화벽 예외 어플리케이션 현황 점검">
-    <help>방화벽 예외 어플리케이션 현황을 확인 후 악성 소프트웨어 여부를 점검</help>
-    <utility>
-      <!-- TODO -->
-      <util type="util1" name="">
-        <param name="xml" value=""></param>
-        <param name="out" value=""></param>
-      </util>
-      <util type="util2" name="">
-        <param name="xml" value=""></param>
-        <param name="out" value=""></param>
-      </util>
-    </utility>
-    <output>
-      <column type="col1" key="" name="TODO"></column>
-      <column type="col2" name="TODO"></column>
-    </output>
-  </Item>
-
-  <Item code="MA-007" title="사용자 행위 추적">
+  <Item code="MA-006" title="사용자 행위 추적">
     <help>사용자 행위 중에서 일반적인 사용자가 하지 않을 행위를 검토</help>
     <utility>
       <!-- TODO -->
-      <util type="util1" name="">
-        <param name="xml" value=""></param>
-        <param name="out" value=""></param>
+      <util type="util1" name="lastactivityview.exe">
+        <param name="xml" value="/sxml"></param>
+        <param name="out" value="UserActivity.xml"></param>
       </util>
-      <util type="util2" name="">
-        <param name="xml" value=""></param>
+      <util type="util2" name="sigcheck.exe">
+        <param name="xml" value="-nobanner -c"></param>
         <param name="out" value=""></param>
       </util>
     </utility>
@@ -130,7 +111,7 @@
     </output>
   </Item>
 
-  <Item code="MA-008" title="블랙리스트 소프트웨어 설치 점검">
+  <Item code="MA-007" title="블랙리스트 소프트웨어 설치 점검">
     <help>블랙리스트 목록 내의 소프트웨어가 존재할 경우 취약</help>
     <utility>
       <!-- 윈도우 프로그램 설치 및 제거 목록을 확인하여 블랙리스트 목록을 최대한 도출 
@@ -139,11 +120,32 @@
         <param name="xml" value="/sxml"></param>
         <param name="out" value="UserActivity.xml"></param>
       </util>
+      <util type="util2" name="sigcheck.exe">
+        <param name="xml" value="-nobanner -c"></param>
+        <param name="out" value=""></param>
+      </util>
     </utility>
     <output>
       <column type="col1" key="" name="설치된 소프트웨어 목록"></column>
       <column type="col2" name="악성 여부"></column>
     </output>
+  </Item>
+
+
+  <Item code="MA-008" title="백신 실시간 검사 설정 점검">
+    <help>백신 실시간 검사가 비활성인 경우 취약</help>
+    <utility>
+      <!-- 레지스트리에서 백신 실시간 검사가 비활성인지 체크, 왠만해선 레지스트리 수정이 불가함 (V3 기준) -->
+      <util type="util1" name="reg.exe">
+        <param name="hive" value="HKLM"></param>
+        <param name="key" value="SOFTWARE\Microsoft\Internet Explorer"></param>
+        <param name="out" value=""></param>
+      </util>
+      <output>
+        <column type="col1" key="" name="설치된 소프트웨어 목록"></column>
+        <column type="col2" name="악성 여부"></column>
+      </output>
+    </utility>
   </Item>
 
   <Item code="MA-009" title="중요 이벤트에 대한 로그를 수집">

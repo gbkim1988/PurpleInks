@@ -142,12 +142,12 @@ namespace GreyInks
             {
                 //https://stackoverflow.com/questions/133379/elevating-process-privilege-programmatically
                 // Restart program and run as admin
-                //var exeName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-                //ProcessStartInfo startInfo = new ProcessStartInfo(exeName);
-                //startInfo.Verb = "runas";
-                //System.Diagnostics.Process.Start(startInfo);
-                //Application.Current.Shutdown();
-                //return;
+                var exeName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+                ProcessStartInfo startInfo = new ProcessStartInfo(exeName);
+                startInfo.Verb = "runas";
+                System.Diagnostics.Process.Start(startInfo);
+                Application.Current.Shutdown();
+                return;
             }
 
             //var CheckList = ConfigurationManager.AppSettings["Title"];

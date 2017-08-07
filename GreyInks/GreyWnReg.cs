@@ -36,20 +36,67 @@ namespace GreyInks
             }
             else if( hive == Hive.LocalMachine)
             {
-                hkey = Registry.LocalMachine;
+                //hkey = Registry.LocalMachine;
                 // Key 가 없는 경우 Null Reference Error 가 발생 
-                hkey = hkey.OpenSubKey(path);
-                if(hkey == null)
+                //hkey = hkey.OpenSubKey(path);
+                // 플랫폼에 종속적인 코드가 투입되야 할 것으로 생각됨
+                using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+                {
+                    hkey = hklm.OpenSubKey(path);
+                    if (hkey == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return (string)hkey.GetValue(key).ToString();
+                    }
+                }
+
+            }else
+            {
+                return null;
+            }
+        }
+
+        public static string [] GetSubKeyNames(string path, Hive hive)
+        {
+            RegistryKey hkey;
+            if (hive == Hive.CurrentUser)
+            {
+                hkey = Registry.CurrentUser;
+                hkey = hkey.OpenSubKey(path, false);
+
+                if (hkey == null)
                 {
                     return null;
                 }
                 else
                 {
-                    return (string)hkey.GetValue(key);
+                    return hkey.GetSubKeyNames();
                 }
-                
 
-            }else
+            }
+            else if (hive == Hive.LocalMachine)
+            {
+                hkey = Registry.LocalMachine;
+                using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+                {
+                    hkey = hklm.OpenSubKey(path);
+                }
+                //hkey = hkey.OpenSubKey(path, false);
+                if (hkey == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return hkey.GetSubKeyNames();
+                }
+
+
+            }
+            else
             {
                 return null;
             }
