@@ -55,6 +55,7 @@ SET InstallationResult = Installer.Install()
 WSCRIPT.ECHO InstallationResult
 
 WScript.Echo "Press [ENTER] to continue..."
+WScript.StdIn.ReadLine
 
 ' Read dummy input. This call will not return until [ENTER] is pressed.
-WScript.StdIn.ReadLine
+

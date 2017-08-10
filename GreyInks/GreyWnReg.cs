@@ -16,6 +16,42 @@ namespace GreyInks
             LocalMachine = 0,
             CurrentUser = 1
         }
+        public static string GetRegistryValueEx(string path, string key, Hive hive)
+        {
+            RegistryKey hkey;
+            // Platform Detect Needed
+            bool is64bit = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432"));
+            if (is64bit)
+            {
+                using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+                {
+                    hkey = hklm.OpenSubKey(path);
+                    if (hkey == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return (string)hkey.GetValue(key).ToString();
+                    }
+                }
+            }else
+            {
+                using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
+                {
+                    hkey = hklm.OpenSubKey(path);
+                    if (hkey == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return (string)hkey.GetValue(key).ToString();
+                    }
+                }
+            }
+            
+        }
         public static string GetRegistryValue(string path, string key, Hive hive)
         {
             RegistryKey hkey;
@@ -40,6 +76,7 @@ namespace GreyInks
                 // Key 가 없는 경우 Null Reference Error 가 발생 
                 //hkey = hkey.OpenSubKey(path);
                 // 플랫폼에 종속적인 코드가 투입되야 할 것으로 생각됨
+                /*
                 using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
                 {
                     hkey = hklm.OpenSubKey(path);
@@ -51,9 +88,21 @@ namespace GreyInks
                     {
                         return (string)hkey.GetValue(key).ToString();
                     }
+                }*/
+                hkey = Registry.LocalMachine;
+
+                hkey = hkey.OpenSubKey(path);
+                if (hkey == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return (string)hkey.GetValue(key);
                 }
 
-            }else
+            }
+            else
             {
                 return null;
             }

@@ -69,7 +69,6 @@ namespace GreyInks
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
                 }
             }
         }
@@ -104,7 +103,7 @@ namespace GreyInks
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+
                 }
             }
             output = tmp;

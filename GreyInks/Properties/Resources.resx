@@ -121,8 +121,4 @@
   <data name="CheckList" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckList.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="테스트" xml:space="preserve">
-    <value>아무거나</value>
-    <comment>설명입니다.</comment>
-  </data>
 </root>

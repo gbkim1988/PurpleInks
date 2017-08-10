@@ -62,22 +62,23 @@ namespace GreyInks.Properties {
         
         /// <summary>
         ///   &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
-        ///&lt;helloworld&gt;
-        ///  
-        ///&lt;/helloworld&gt;과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///&lt;CheckList&gt;
+        ///  &lt;Item code=&quot;MA-001&quot; title=&quot;인터넷 익스플로러 취약성 점검&quot;&gt;
+        ///    &lt;help&gt;인터넷 익스플로러의 잠재적인 취약성을 판별 &lt;/help&gt;
+        ///    &lt;utility&gt;
+        ///      &lt;util type=&quot;util1&quot; name=&quot;reg.exe&quot;&gt;
+        ///        &lt;param name=&quot;hive&quot; value=&quot;HKLM&quot;&gt;&lt;/param&gt;
+        ///        &lt;param name=&quot;key&quot; value=&quot;SOFTWARE\Microsoft\Internet Explorer&quot;&gt;&lt;/param&gt;
+        ///        &lt;param name=&quot;out&quot; value=&quot;&quot;&gt;&lt;/param&gt;
+        ///      &lt;/util&gt;
+        ///    &lt;/utility&gt;
+        ///    &lt;output&gt;
+        ///      &lt;column type=&quot;col1&quot; key=&quot;&quot; name=&quot;TODO&quot;&gt;&lt;/column&gt;
+        ///      &lt;column type=&quot;col2&quot; name=&quot;[나머지 문자열은 잘림]&quot;;과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string CheckList {
             get {
                 return ResourceManager.GetString("CheckList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   아무거나과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        internal static string 테스트 {
-            get {
-                return ResourceManager.GetString("테스트", resourceCulture);
             }
         }
     }

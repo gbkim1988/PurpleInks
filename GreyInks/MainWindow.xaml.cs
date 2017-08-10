@@ -7,6 +7,8 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Security.Principal;
@@ -22,7 +24,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace GreyInks
 {
@@ -37,13 +41,91 @@ namespace GreyInks
             Negative = -1,
             Pending = 0
         }
-        [Serializable()]
+
+        [XmlRoot("dictionary")]
+        public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IXmlSerializable
+        {
+            // 참조 : https://stackoverflow.com/questions/495647/serialize-class-containing-dictionary-member
+            #region IXmlSerializable Members
+            public System.Xml.Schema.XmlSchema GetSchema()
+            {
+                return null;
+            }
+
+            /// <summary>
+            /// 인터넷을 참조하여 작성하였으나 수정이 필요함
+            /// </summary>
+            /// <param name="reader"></param>
+            public void ReadXml(System.Xml.XmlReader reader)
+            {
+                XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
+                XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
+
+                bool wasEmpty = reader.IsEmptyElement;
+                reader.Read();
+
+                if (wasEmpty)
+                    return;
+
+                while (reader.NodeType != System.Xml.XmlNodeType.EndElement)
+                {
+                    reader.ReadStartElement("elem");
+
+                    reader.ReadStartElement("key");
+                    TKey key = (TKey)keySerializer.Deserialize(reader);
+                    reader.ReadEndElement();
+
+                    reader.ReadStartElement("value");
+                    TValue value = (TValue)valueSerializer.Deserialize(reader);
+                    reader.ReadEndElement();
+
+                    this.Add(key, value);
+
+                    reader.ReadEndElement();
+                    reader.MoveToContent();
+                }
+                reader.ReadEndElement();
+            }
+            /// <summary>
+            /// 인터넷을 참조하여 작성하였으나 수정이 필요함
+            /// </summary>
+            /// <param name="writer"></param>
+            public void WriteXml(System.Xml.XmlWriter writer)
+            {
+                XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
+                XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
+
+                foreach (TKey key in this.Keys)
+                {
+                    writer.WriteStartElement("elem");
+
+                    writer.WriteStartElement("key");
+                    keySerializer.Serialize(writer, key);
+                    writer.WriteEndElement();
+
+                    writer.WriteStartElement("value");
+                    TValue value = this[key];
+                    valueSerializer.Serialize(writer, value);
+                    writer.WriteEndElement();
+
+                    writer.WriteEndElement();
+                }
+            }
+            #endregion
+        }
+        public class CheckList
+        {
+            [XmlElement("item")]
+            public List<CheckItem> items { get; set; }
+        }
+        [XmlRoot(ElementName="CheckList")]
         public class CheckItem : INotifyPropertyChanged
         {
             [System.Xml.Serialization.XmlElement("code")]
             public string code { get; set; }
             [System.Xml.Serialization.XmlElement("title")]
             public string title;
+            [XmlIgnore]
             public string Title {
                 get {
                     return title;
@@ -54,12 +136,15 @@ namespace GreyInks
                 } }
             [System.Xml.Serialization.XmlElement("status")]
             public Result status;
+            [XmlIgnore]
             public Result Status { get { return status; } set { status = value; OnPropertyChanged("Status"); } }
             [System.Xml.Serialization.XmlElement("help")]
             public string help { get; set; }
-            [System.Xml.Serialization.XmlElement("proofs")]
-            public Dictionary<string, string> proofs;
+            [XmlIgnore]
+            public SerializableDictionary<string, string> proofs;
+            [XmlIgnore]
             public String progress;
+            [XmlIgnore]
             public String Progress {
                 get { return progress; }
                 set
@@ -68,9 +153,10 @@ namespace GreyInks
                     OnPropertyChanged("Progress");
                 }
             }
+
             public event PropertyChangedEventHandler PropertyChanged;
 
-            public Dictionary<string, string> Proofs {
+            public SerializableDictionary<string, string> Proofs {
                 get { return proofs; }
                 set {
                     proofs = value;
@@ -110,7 +196,7 @@ namespace GreyInks
                     help = item.Element("help").Value,
                     title = (string)item.Attribute("title"),
                     status = Result.Pending,
-                    proofs = new Dictionary<string, string>(),
+                    proofs = new SerializableDictionary<string, string>(),
                     Progress = ""
                 });
             }
@@ -205,10 +291,72 @@ namespace GreyInks
         private void DoItNow(object sender, ElapsedEventArgs e)
         {
             GreyDoIt.Default();
-            GreyDoIt.Do(this.CheckItemList);
-            MessageBox.Show("Fin");
-        }
+            try
+            {
+                GreyDoIt.Do(this.CheckItemList);
+            }catch(Exception x)
+            {
+                MessageBox.Show(x.Message);
+                MessageBox.Show(x.StackTrace);
+            }
+            
 
+            string ReportFileName = "GreyReport.xml";
+            // Serialize CheckItemList
+            XmlSerializer Serializer = new XmlSerializer(typeof(CheckList));
+            using (var fStream = new FileStream("GreyReport.xml", FileMode.Create))
+            {
+                CheckList checklist = new CheckList { items = new List<CheckItem>() };
+                foreach(var item in this.CheckItemList)
+                {
+                    checklist.items.Add(item);
+                }
+                Serializer.Serialize(fStream, checklist);                
+            }
+
+            InitTimer = new Timer();
+            InitTimer.Interval = 3000;
+            InitTimer.Elapsed += ShutDownApplication;
+            InitTimer.AutoReset = false;
+            InitTimer.Start();
+            // 현재 프로세스를 종료함
+            // 갑작스럽게 종료되는 경향이 있음
+
+            /*
+            SmtpClient client = new SmtpClient();
+            client.Port = 587;
+            client.Host = "gmail.com";
+            client.EnableSsl = true;
+            client.Timeout = 10000;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential("@gmail.com", "password");
+
+            MailMessage mm = new MailMessage("donotreply@domain.com", "sendtomyemail@domain.co.uk", "test", "test");
+            mm.BodyEncoding = UTF8Encoding.UTF8;
+            mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+            if (File.Exists(ReportFileName))
+            {
+                Attachment attachment = new Attachment(ReportFileName, MediaTypeNames.Application.Octet);
+                ContentDisposition disposition = attachment.ContentDisposition;
+                disposition.CreationDate = File.GetCreationTime(ReportFileName);
+                disposition.ModificationDate = File.GetLastWriteTime(ReportFileName);
+                disposition.ReadDate = File.GetLastAccessTime(ReportFileName);
+                disposition.FileName = System.IO.Path.GetFileName(ReportFileName);
+                disposition.Size = new FileInfo(ReportFileName).Length;
+                disposition.DispositionType = DispositionTypeNames.Attachment;
+                mm.Attachments.Add(attachment);
+            }
+
+            client.Send(mm);
+            */
+
+        }
+        private void ShutDownApplication(object sender, ElapsedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
         private static bool IsAdministrator()
         {
             WindowsIdentity identity = WindowsIdentity.GetCurrent();

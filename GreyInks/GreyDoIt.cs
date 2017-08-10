@@ -17,6 +17,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography;
 using ShootBlues;
 using System.Text;
+using System.ServiceProcess;
 
 namespace GreyInks
 {
@@ -45,22 +46,22 @@ namespace GreyInks
                     Diagnosis_MA_001(item);
                     break;
                 case "MA-002":
-                    //Diagnosis_MA_002(item);
+                    Diagnosis_MA_002(item);
                     break;
                 case "MA-003":
-                    //Diagnosis_MA_003(item);
+                    Diagnosis_MA_003(item);
                     break;
                 case "MA-004":
-                    //Diagnosis_MA_004(item);
+                    Diagnosis_MA_004(item);
                     break;
                 case "MA-005":
-                    //Diagnosis_MA_005(item);
+                    Diagnosis_MA_005(item);
                     break;
                 case "MA-006":
-                    //Diagnosis_MA_006(item);
+                    Diagnosis_MA_006(item);
                     break;
                 case "MA-007":
-                    //Diagnosis_MA_007(item);
+                    Diagnosis_MA_007(item);
                     break;
                 case "MA-008":
                     Diagnosis_MA_008(item);
@@ -230,21 +231,21 @@ namespace GreyInks
              * 5) 종료
              * 참고 : http://techforum4u.com/entry.php/11-Install-Windows-Update-Using-C
              */
-            
+            int count = 0;
             // Reflection 을 이용해서 dll 을 로드할 시에 x86 또는 x64 인지를 잘 확인        
             // 전략적으로는 32 비트가 유용하다. 일단 해보자.
-
+            /*
             UpdateSessionClass uSession = new UpdateSessionClass();
             IUpdateSearcher uSearcher = uSession.CreateUpdateSearcher();
             ISearchResult uResult = uSearcher.Search("IsInstalled=0 and Type='Software'");
-            int count = 0;
+            
             foreach (IUpdate update in uResult.Updates)
             {
                 count += 1;
                 item.Proofs.Add(update.Title, update.Description);
             }
-
-            if(count > 0)
+            */
+            if (count > 0)
             {
                 item.Status = Result.Negative;
             }else
@@ -261,7 +262,7 @@ namespace GreyInks
             scriptProc.StartInfo.Arguments = "//Nologo WinUpdates.vbe";
             scriptProc.StartInfo.WindowStyle = ProcessWindowStyle.Normal; //prevent console window from popping up
             scriptProc.StartInfo.Verb = "runas"; // 
-            //scriptProc.Start();
+            scriptProc.Start();
             scriptProc.Close();
 
             
@@ -304,224 +305,234 @@ namespace GreyInks
         /// <param name="item"></param>
         public static void Diagnosis_MA_005(CheckItem item)
         {
-            string MainKey = @"SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
-            List<string> InstalledSoftware = new List<string>();
-            // 진단 시작
-            string[] subkeys = GreyWnReg.GetSubKeyNames(MainKey, GreyWnReg.Hive.LocalMachine);
             int Count = 0;
-            foreach (var key in subkeys)
+            try
             {
-                string value = GreyWnReg.GetRegistryValue(string.Join("\\", MainKey, key), "DisplayName", GreyWnReg.Hive.LocalMachine);
-                if (value != null)
-                    InstalledSoftware.Add(value);
-            }
-
-            MainKey = @"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
-            string[] subkeys2 = GreyWnReg.GetSubKeyNames(MainKey, GreyWnReg.Hive.LocalMachine);
-
-            foreach (var key in subkeys2)
-            {
-                string value = GreyWnReg.GetRegistryValue(string.Join("\\", MainKey, key), "DisplayName", GreyWnReg.Hive.LocalMachine);
-                if (value != null)
-                    InstalledSoftware.Add(value);
-            }
-
-            // APC 체크 
-            IEnumerable<string> results = InstalledSoftware.Where(x => x != null && x.ToLower().Contains("ahn") && x.ToLower().Contains("policy") && x.ToLower().Contains("agent"));
-            if (results.Count() > 0)
-            {
-                foreach (var elem in results)
+                string MainKey = @"SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
+                List<string> InstalledSoftware = new List<string>();
+                // 진단 시작
+                string[] subkeys = GreyWnReg.GetSubKeyNames(MainKey, GreyWnReg.Hive.LocalMachine);
+                
+                foreach (var key in subkeys)
                 {
-                    if (elem != null)
+                    string value = GreyWnReg.GetRegistryValue(string.Join("\\", MainKey, key), "DisplayName", GreyWnReg.Hive.LocalMachine);
+                    if (value != null)
+                        InstalledSoftware.Add(value);
+                }
+
+                MainKey = @"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
+                string[] subkeys2 = GreyWnReg.GetSubKeyNames(MainKey, GreyWnReg.Hive.LocalMachine);
+
+                foreach (var key in subkeys2)
+                {
+                    string value = GreyWnReg.GetRegistryValue(string.Join("\\", MainKey, key), "DisplayName", GreyWnReg.Hive.LocalMachine);
+                    if (value != null)
+                        InstalledSoftware.Add(value);
+                }
+
+                // APC 체크 
+                IEnumerable<string> results = InstalledSoftware.Where(x => x != null && x.ToLower().Contains("ahn") && x.ToLower().Contains("policy") && x.ToLower().Contains("agent"));
+                if (results.Count() > 0)
+                {
+                    foreach (var elem in results)
                     {
-                        try
+                        if (elem != null)
                         {
-                            item.Proofs.Add(elem, "설치");
-                        }
-                        catch (Exception)
-                        {
+                            try
+                            {
+                                item.Proofs.Add(elem, "설치");
+                            }
+                            catch (Exception)
+                            {
+
+                            }
 
                         }
 
                     }
 
                 }
-
-            }
-            else
-            {
-                try
+                else
                 {
-                    item.Proofs.Add("APC Agent", "미설치");
-                    Count += 1;
-                }
-                catch (Exception)
-                {
-
-                }
-
-            }
-
-            // 매체제어 체크 체크 
-            Process[] localAll = Process.GetProcesses();
-
-            IEnumerable<Process> sdpa = localAll.Where(x => x.ProcessName.ToLower().Contains("SDPA".ToLower()));
-
-            if (sdpa.Count() > 0)
-            {
-                foreach (var elem in sdpa)
-                {
-
-                    if (elem != null)
+                    try
                     {
-                        try
-                        {
-                            item.Proofs.Add(elem.ProcessName, "설치");
-                        }
-                        catch (Exception) { }
-
+                        item.Proofs.Add("APC Agent", "미설치");
+                        Count += 1;
                     }
-                }
-            }
-            else
-            {
-
-                try
-                {
-                    item.Proofs.Add("매체 제어(SDPA)", "미설치");
-                    Count += 1;
-                }
-                catch (Exception) { }
-            }
-
-            IEnumerable<Process> n5client = localAll.Where(x => x != null & x.ProcessName.ToLower().Contains("n5client".ToLower()));
-
-            if (n5client.Count() > 0)
-            {
-                foreach (var elem in n5client)
-                {
-
-                    if (elem != null)
+                    catch (Exception)
                     {
-                        try
-                        {
-                            item.Proofs.Add(elem.ProcessName, "설치");
-                        }
-                        catch (Exception) { }
-
-                    }
-                }
-            }
-            else
-            {
-
-                try
-                {
-                    item.Proofs.Add("NetClient", "미설치");
-                    Count += 1;
-                }
-                catch (Exception) { }
-            }
-
-            IEnumerable<Process> edpa = localAll.Where(x => x != null & x.ProcessName.ToLower().Contains("edpa".ToLower()));
-
-            if (n5client.Count() > 0)
-            {
-                foreach (var elem in edpa)
-                {
-
-                    if (elem != null)
-                    {
-                        try
-                        {
-                            item.Proofs.Add(elem.ProcessName, "설치");
-                        }
-                        catch (Exception) { }
-
-                    }
-                }
-            }
-            else
-            {
-
-                try
-                {
-                    item.Proofs.Add("데이터 유출 방지프로그램(DLP)", "미설치");
-                    Count += 1;
-                }
-                catch (Exception) { }
-            }
-
-            IEnumerable<string> backoffice = InstalledSoftware.Where(x => x != null && x.ToLower().Contains("BACKOFFICE"));
-            if (backoffice.Count() > 0)
-            {
-                foreach (var elem in backoffice)
-                {
-                    if (elem != null)
-                    {
-                        try
-                        {
-                            item.Proofs.Add(elem, "설치");
-                            Count += 1;
-                        }
-                        catch (Exception)
-                        {
-
-                        }
 
                     }
 
                 }
 
-            }
-            else
-            {
-                try
+                // 매체제어 체크 체크 
+                Process[] localAll = Process.GetProcesses();
+                // 서비스 목록 출력
+                ServiceController[] scServices = ServiceController.GetServices();
+
+                IEnumerable<Process> sdpa = localAll.Where(x => x.ProcessName.ToLower().Contains("SDPA".ToLower()));
+
+                if (sdpa.Count() > 0)
                 {
-                    item.Proofs.Add("BackOffice", "미설치");
-                }
-                catch (Exception)
-                {
-
-                }
-
-            }
-
-
-            IEnumerable<string> MiPlatform = InstalledSoftware.Where(x => x != null && x.ToLower().Contains("MiPlatform"));
-            if (MiPlatform.Count() > 0)
-            {
-                foreach (var elem in MiPlatform)
-                {
-                    if (elem != null)
+                    foreach (var elem in sdpa)
                     {
-                        try
+
+                        if (elem != null)
                         {
-                            item.Proofs.Add(elem, "설치");
-                            Count += 1;
+                            try
+                            {
+                                item.Proofs.Add(elem.ProcessName, "설치");
+                            }
+                            catch (Exception) { }
+
                         }
-                        catch (Exception)
+                    }
+                }
+                else
+                {
+
+                    try
+                    {
+                        item.Proofs.Add("매체 제어(SDPA)", "미설치");
+                        Count += 1;
+                    }
+                    catch (Exception) { }
+                }
+
+                IEnumerable<Process> n5client = localAll.Where(x => x != null & x.ProcessName.ToLower().Contains("n5client".ToLower()));
+
+                if (n5client.Count() > 0)
+                {
+                    foreach (var elem in n5client)
+                    {
+
+                        if (elem != null)
                         {
+                            try
+                            {
+                                item.Proofs.Add(elem.ProcessName, "설치");
+                            }
+                            catch (Exception) { }
+
+                        }
+                    }
+                }
+                else
+                {
+
+                    try
+                    {
+                        item.Proofs.Add("NetClient", "미설치");
+                        Count += 1;
+                    }
+                    catch (Exception) { }
+                }
+
+                IEnumerable<Process> edpa = localAll.Where(x => x != null & x.ProcessName.ToLower().Contains("edpa".ToLower()));
+                //scServices.Where(x => x != null & x.DisplayName )
+                if (edpa.Count() > 0)
+                {
+                    foreach (var elem in edpa)
+                    {
+
+                        if (elem != null)
+                        {
+                            try
+                            {
+                                item.Proofs.Add(elem.ProcessName, "설치");
+                            }
+                            catch (Exception) { }
+
+                        }
+                    }
+                }
+                else
+                {
+
+                    try
+                    {
+                        item.Proofs.Add("데이터 유출 방지프로그램(DLP)", "미설치");
+                        Count += 1;
+                    }
+                    catch (Exception) { }
+                }
+
+                IEnumerable<string> backoffice = InstalledSoftware.Where(x => x != null && x.ToLower().Contains("BACKOFFICE"));
+                if (backoffice.Count() > 0)
+                {
+                    foreach (var elem in backoffice)
+                    {
+                        if (elem != null)
+                        {
+                            try
+                            {
+                                item.Proofs.Add(elem, "설치");
+                                Count += 1;
+                            }
+                            catch (Exception)
+                            {
+
+                            }
 
                         }
 
                     }
 
                 }
+                else
+                {
+                    try
+                    {
+                        item.Proofs.Add("BackOffice", "미설치");
+                    }
+                    catch (Exception)
+                    {
 
-            }
-            else
+                    }
+
+                }
+
+
+                IEnumerable<string> MiPlatform = InstalledSoftware.Where(x => x != null && x.ToLower().Contains("MiPlatform"));
+                if (MiPlatform.Count() > 0)
+                {
+                    foreach (var elem in MiPlatform)
+                    {
+                        if (elem != null)
+                        {
+                            try
+                            {
+                                item.Proofs.Add(elem, "설치");
+                                Count += 1;
+                            }
+                            catch (Exception)
+                            {
+
+                            }
+
+                        }
+
+                    }
+
+                }
+                else
+                {
+                    try
+                    {
+                        item.Proofs.Add("송장 출력 프로그램", "미설치");
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }
+            }catch(Exception e)
             {
-                try
-                {
-                    item.Proofs.Add("송장 출력 프로그램", "미설치");
-                }
-                catch (Exception)
-                {
-
-                }
-
+                MessageBox.Show(e.Message);
             }
+            
 
             if(Count > 0)
             {
@@ -572,7 +583,8 @@ namespace GreyInks
                                     {
                                         using (var stream = File.OpenRead(filePath))
                                         {
-                                            hash = Encoding.Default.GetString(sha256.ComputeHash(stream));
+                                            byte[] hashValue = sha256.ComputeHash(stream);
+                                            hash = BitConverter.ToString(hashValue).Replace("-", String.Empty);
                                         }
                                     }
 
@@ -612,15 +624,13 @@ namespace GreyInks
         {
             // 진단 시작
             // HKEY_LOCAL_MACHINE\SOFTWARE\AhnLab\ASPack\9.0\Option\AVMON
-            string[] test = GreyWnReg.GetSubKeyNames(@"SOFTWARE\AhnLab\ASPack\9.0\Option\AVMON", GreyWnReg.Hive.LocalMachine);
-            MessageBox.Show(string.Join("\n", test));
-            string value = GreyWnReg.GetRegistryValue("SOFTWARE\\AhnLab\\ASPack\\9.0\\Option\\AVMON", "sysmonuse", GreyWnReg.Hive.LocalMachine);
+            string value = GreyWnReg.GetRegistryValueEx("SOFTWARE\\AhnLab\\ASPack\\9.0\\Option\\AVMON", "sysmonuse", GreyWnReg.Hive.LocalMachine);
             item.Proofs.Add("sysmonuse", value);
             if ( value != "1")
             {
                 item.Status = Result.Negative;                
             }
-            value = GreyWnReg.GetRegistryValue("SOFTWARE\\AhnLab\\ASPack\\9.0\\ServiceStatus", "AvMon", GreyWnReg.Hive.LocalMachine);
+            value = GreyWnReg.GetRegistryValueEx("SOFTWARE\\AhnLab\\ASPack\\9.0\\ServiceStatus", "AvMon", GreyWnReg.Hive.LocalMachine);
             item.Proofs.Add("AvMon", value);
             if (value != "1")
             {
